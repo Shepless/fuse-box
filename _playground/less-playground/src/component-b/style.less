@@ -1,0 +1,31 @@
+@import "vars";
+@import "mixins";
+@import "lesshat/lesshat";
+
+.component-b {
+    .component-style(#FC0);
+
+    .title {
+        width: 100%;
+        font-size: @title-size;
+        font-weight: bold;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #AAA;
+    }
+
+    .body {
+        color: #C00;
+    }
+
+    .keyframes(~'cat-wobble, 0%{ transform: scale(1); opacity: 1; } 50%{ transform: scale(0.8); opacity: 0.5; } 100%{ transform: scale(1); opacity: 1; }');
+
+    .cat-with-hat {
+        width: 100%;
+        height: 200px;
+        .animation(cat-wobble 1s infinite);
+        background: data-uri('src/images/cat.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+}

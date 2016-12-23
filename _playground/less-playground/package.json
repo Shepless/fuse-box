@@ -1,0 +1,14 @@
+{
+  "name": "less-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fusebox.js",
+  "scripts": {
+    "build": "node fusebox.js"
+  },
+  "author": "FuseBox (https://github.com/fuse-box/fuse-box)",
+  "license": "ISC",
+  "dependencies": {
+    "lesshat": "4.1.0"
+  }
+}
