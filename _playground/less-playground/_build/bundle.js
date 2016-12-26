@@ -1,5 +1,4 @@
 (function(FuseBox){
-console.log("here")
 var __fsbx_css = function(__filename, contents) {
     if (FuseBox.isServer) {
         return;
