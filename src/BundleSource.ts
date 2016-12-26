@@ -1,6 +1,6 @@
 import { BundleData } from './Arithmetic';
 import { ModuleCollection } from "./ModuleCollection";
-import { WorkFlowContext } from "./WorkFlowContext";
+import { WorkFlowContext } from "./WorkflowContext";
 import { Config } from "./Config";
 import { File } from "./File";
 import * as path from "path";
@@ -43,6 +43,14 @@ export class BundleSource {
      */
     constructor(public context: WorkFlowContext) {
         this.concat = new Concat(true, "", "\n");
+    }
+
+    /**
+     *
+     * 
+     * @memberOf BundleSource
+     */
+    public init() {
         this.concat.add(null, "(function(FuseBox){");
     }
 

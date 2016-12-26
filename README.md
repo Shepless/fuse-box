@@ -1,10 +1,12 @@
 [![Build Status](https://travis-ci.org/fuse-box/fuse-box.svg?branch=master)](https://travis-ci.org/fuse-box/fuse-box)
-[![Fusebox-bundler](https://badges.gitter.im/owner/repo.png)](https://gitter.im/fusebox-bundler/Lobby)
+[![Fusebox-bundler](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/fusebox-bundler/Lobby)
+
+[![NPM](https://nodei.co/npm/fuse-box.png?downloads=true)](https://nodei.co/npm/fuse-box/)
 
 # FuseBox
 
 > We are getting there. The API is stable. Documentation is in progress.
-> Join now! FuseBox is now open for testing!
+> Join [gitter channel](https://gitter.im/fusebox-bundler/Lobby), we are active!
 
 ## A heroic bundler, that just does it right
 
@@ -17,7 +19,8 @@ Start fusing!
 [react-example](https://github.com/fuse-box/react-example) 50ms to fuse!
 
 ## Recent updates
-* 1.3.21 Require options introduced. Added [StylusPlugin](#stylusplugin), Raw style options for CSSPlugin (big thanks to _kai_ and _shepless_),
+* 1.3.24 Added [BannerPlugin](#bannerplugin) (shepless)
+* 1.3.21-23 Require options introduced. Added [StylusPlugin](#stylusplugin), Raw style options for CSSPlugin (big thanks to _kai_ and _shepless_),
 * v1.3.18-1.3.21 PluginChains introduced! Added [PostCSSPlugin](#postcssplugin) [LESSPlugin](#lessplugin) (thanks shepless)
 * v1.3.17 Added [wildcard import](#wildcard-import) support
 * v1.3.16 Prints a pretty stacktrace instead of unreadable acorn exceptions.
@@ -185,15 +188,7 @@ Super powers of FuseBox allow doing that without code redundancy. An API of a se
 Only one thing you need to consider before that - packaging.
 
 Your current project is called "default" This is by design. All dynamic modules will register themselves into it automatically. 
-If you want to require a bundle it must have a different namespace. Unless you want to keep is shared. Add `package` property to the initializer:
-
-```js
-FuseBox.init({
-    homeDir: "src/",
-    package : "myLib",
-    outFile: "./bundles/myLib.js"
-}).bundle(">index.js");
-```
+If you want to require a bundle it must have a different namespace. Unless you want to keep is shared. Read up on [package configuration](#package-name), for better understanding
 
 Bundle your first package, then make sure you master bundle does not have the same name (otherwise they will share filename scopes) and require it like any other file
 
@@ -351,7 +346,7 @@ Fusebox contains premade plugins, that should help you to get started.
 It's very easy to start working with css files. You have 2 options, you either bundle the contents or serve the files. A decision that can be made at build time.
 
 For example:
-```
+```js
 plugins: [
     fsbx.CSSPlugin({
         minify: true
@@ -364,7 +359,7 @@ In this case, all CSS files will be bundled.
 But if you define "serve" option with a callback, all files will be filtered through it. A callback is expected to return a string with a browser path. If you return "undefined" or *NOT* a string, that file will be bundled as if no option was specified.
 
 All css files will be served by server.
-```
+```js
 plugins: [
     fsbx.CSSPlugin({
         minify: true,
@@ -396,6 +391,8 @@ Like this:
  styles: require("./style.less?raw")
 })
 ```
+
+
 
 ## LessPlugin
 Install less first.
@@ -436,6 +433,12 @@ plugins:[
 > We still need to figure out what to do with sourcemaps. Be patient!
 
 
+## StylusPlugin
+```
+plugins:[
+  [fsbx.StylusPlugin(), fsbx.CSSPlugin()]
+],
+```
 
 ## HTML Plugin
 
@@ -501,6 +504,14 @@ plugins: [
 ]
 ```
 
+## BannerPlugin
+Add anything at the top of your bundle.
+```
+plugins: [
+    // Add a banner to bundle output
+    fxbx.BannerPlugin('// Hey this is my banner! Copyright 2016!')
+]
+```
 
 ## Typescript helpers
 
